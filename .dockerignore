@@ -1,0 +1,11 @@
+# .dockerignore
+.git
+.idea
+node_modules
+dist
+*.exe
+*.test
+vendor
+Dockerfile
+.dockerignore
+README.md
