@@ -18,8 +18,11 @@ type Server struct {
 
 // NewServer 创建HTTP服务器实例
 func NewServer() *Server {
+	// 设置 Gin 运行模式
+	gin.SetMode(gin.ReleaseMode)
+
 	// 创建Gin引擎
-	engine := gin.Default()
+	engine := gin.New()
 
 	// 初始化服务
 	imageService := service.NewImageService()
@@ -36,7 +39,9 @@ func NewServer() *Server {
 	// 初始化中间件
 	rateLimiter := middleware.NewRateLimiter()
 
-	// 注册中间件
+	// 注册全局中间件
+	engine.Use(middleware.Logger()) // 自定义访问日志
+	engine.Use(gin.Recovery())      // 恐慌恢复
 	engine.Use(middleware.CORS())
 	engine.Use(middleware.SizeLimit())
 	engine.Use(middleware.Timeout())

@@ -14,6 +14,7 @@ type Config struct {
 	MaxConcurrentRequests int
 	RequestTimeout        int
 	CorsAllowedOrigins    string
+	LogPath               string
 }
 
 var AppConfig *Config
@@ -57,6 +58,7 @@ func LoadConfig() error {
 		MaxConcurrentRequests: maxConcurrentRequests,
 		RequestTimeout:        requestTimeout,
 		CorsAllowedOrigins:    getEnv("CORS_ALLOWED_ORIGINS", "*"),
+		LogPath:               getEnv("LOG_PATH", "app.log"),
 	}
 
 	return nil
